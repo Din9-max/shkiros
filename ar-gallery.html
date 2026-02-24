@@ -54,15 +54,17 @@
             </a-entity>
             
             <!-- Анимированная 3D-модель для красоты (простой цветок) -->
-            <a-entity position="0 0.8 0">
-                <!-- Ветка (палочка) -->
-                <a-cylinder radius="0.02" height="0.5" color="#8B4513" position="0 0 0" rotation="0 0 30"></a-cylinder>
-                <!-- Ягодки/цветочки -->
-                <a-sphere radius="0.08" color="#FF4500" position="0.2 0.2 0"></a-sphere>
-                <a-sphere radius="0.08" color="#FFD700" position="-0.1 0.25 0"></a-sphere>
-                <a-sphere radius="0.06" color="#32CD32" position="0.15 -0.1 0"></a-sphere>
-                <!-- Анимация покачивания -->
-                <a-animation attribute="rotation" to="0 10 20" dur="3000" direction="alternate" repeat="indefinite"></a-animation>
+            <a-entity position="0 0 0">
+                <!-- Кольцо с узором -->
+                <a-torus radius="0.2" radius-tubular="0.02" color="#8B4513" rotation="90 0 0">
+                    <a-animation attribute="rotation" to="90 360 0" dur="5000" repeat="indefinite"></a-animation>
+                </a-torus>
+                
+                <!-- Элементы внутри кольца (вращаются вместе с ним, так как они внутри) -->
+                <a-sphere radius="0.05" color="#CD5C5C" position="0.1 0 0.1"></a-sphere>
+                <a-sphere radius="0.05" color="#4682B4" position="-0.1 0 -0.1"></a-sphere>
+                <a-sphere radius="0.05" color="#32CD32" position="0.1 0 -0.1"></a-sphere>
+                <a-sphere radius="0.05" color="#FFD700" position="-0.1 0 0.1"></a-sphere>
             </a-entity>
         </a-marker>
 
@@ -129,5 +131,6 @@
 </body>
 
 </html>
+
 
 
