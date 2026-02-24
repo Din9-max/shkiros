@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>AR: Ожившая роспись</title>
+    <!-- Подключаем библиотеки A-Frame и AR.js -->
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    
+    <style>
+        body { margin: 0; overflow: hidden; font-family: 'Arial', sans-serif; }
+        /* Стили для текстовых подсказок */
+        .fact-panel {
+            position: fixed;
+            bottom: 20px;
+            left: 10%;
+            width: 80%;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-align: center;
+            z-index: 10;
+            pointer-events: none;
+            backdrop-filter: blur(5px);
+            border-left: 5px solid #4CAF50;
+        }
+        .fact-title { font-weight: bold; color: #2c3e50; margin: 0 0 5px 0; }
+        .fact-text { margin: 0; color: #34495e; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <!-- Панель для отображения истории (она будет одна, меняем текст через JS) -->
+    <div id="infoPanel" class="fact-panel" style="display: none;">
+        <p id="factTitle" class="fact-title">Название росписи</p>
+        <p id="factDescription" class="fact-text">Текст истории и интересный факт...</p>
+    </div>
+
+    <!-- Основная AR-сцена -->
+    <a-scene id="arScene" embedded arjs='sourceType: webcam; debugUIEnabled: false; detectionMode: mono; matrixCodeType: 3x3;' vr-mode-ui="enabled: false">
+        
+        <!-- Камера -->
+        <a-camera static></a-camera>
+
+        <!-- ===== МАРКЕР 1: "Сибирские мотивы" ===== -->
+        <!-- Указываем путь к картинке-маркеру (паттерну) -->
+        <a-marker type='pattern' url='pattern-1.patt' id="marker1">
+            <!-- Контейнер, который появится над маркером -->
+            <a-entity position="0 0.5 0">
+                <!-- Плоскость с фоном для текста -->
+                <a-plane color="#f0e68c" width="1.2" height="0.5" opacity="0.8" position="0 0.25 0"></a-plane>
+                <!-- Текст (в AR.js текст показывается как 3D-текст, но можно просто оставить подсказку в UI) -->
+                <a-text value="Сибирские мотивы" color="#000" align="center" position="0 0.3 0.01" scale="0.5 0.5 0.5"></a-text>
+            </a-entity>
+            
+            <!-- Анимированная 3D-модель для красоты (простой цветок) -->
+            <a-torus-knot radius="0.1" radius-tubular="0.03" p="2" q="3" color="#8B4513" position="0 0.8 0" animation="property: rotation; to: 360 360 0; loop: true; dur: 5000"></a-torus-knot>
+        </a-marker>
+
+        <!-- ===== МАРКЕР 2: "Угольные розы" ===== -->
+        <a-marker type='pattern' url='patterns/pattern-coal-rose.patt' id="marker2">
+            <a-entity position="0 0.5 0">
+                <a-plane color="#708090" width="1.2" height="0.5" opacity="0.8" position="0 0.25 0"></a-plane>
+                <a-text value="Угольные розы" color="#fff" align="center" position="0 0.3 0.01" scale="0.5 0.5 0.5"></a-text>
+            </a-entity>
+            <!-- Простая модель кристалла -->
+            <a-sphere radius="0.15" color="#333" position="0 0.8 0" animation="property: scale; to: 1.2 1.2 1.2; dir: alternate; loop: true; dur: 1000"></a-sphere>
+        </a-marker>
+
+        <!-- Фоновая плоскость, чтобы камера видела хоть что-то -->
+        <a-entity rotation="0 0 0" visible="false"></a-entity>
+    </a-scene>
+
+    <!-- Скрипт для управления историей внизу экрана -->
+    <script>
+        // Привязываем события к маркерам
+        const marker1 = document.getElementById('marker1');
+        const marker2 = document.getElementById('marker2');
+        const infoPanel = document.getElementById('infoPanel');
+        const factTitle = document.getElementById('factTitle');
+        const factDesc = document.getElementById('factDescription');
+
+        // База знаний о росписях
+        const facts = {
+            marker1: {
+                title: "🌿 Сибирские мотивы",
+                text: "Создана в 2023 году под впечатлением от тайги. Интересный факт: в этой росписи используется охра, добытая в Яшкинском районе."
+            },
+            marker2: {
+                title: " Угольные розы",
+                text: "Появилась как символ единства природы и промышленности Кузбасса. Факт: первый узор был нарисован углем из шахты 'Распадская'."
+            }
+        };
+
+        // Следим за появлением/исчезновением маркеров
+        marker1.addEventListener('markerFound', () => {
+            showFact('marker1');
+        });
+        marker1.addEventListener('markerLost', () => {
+            hideFact();
+        });
+
+        marker2.addEventListener('markerFound', () => {
+            showFact('marker2');
+        });
+        marker2.addEventListener('markerLost', () => {
+            hideFact();
+        });
+
+        function showFact(markerId) {
+            factTitle.textContent = facts[markerId].title;
+            factDesc.textContent = facts[markerId].text;
+            infoPanel.style.display = 'block';
+        }
+
+        function hideFact() {
+            infoPanel.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

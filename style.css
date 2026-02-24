@@ -1,0 +1,83 @@
+/* style.css */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(145deg, #f9f3e8 0%, #e6d5b8 100%);
+    color: #2c3e50;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.lobby-container {
+    max-width: 600px;
+    padding: 30px 20px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid #fff;
+    margin: 20px;
+}
+
+h1 {
+    font-size: 2em;
+    color: #4a6b3c;
+    margin-bottom: 20px;
+    border-bottom: 3px dashed #c9a87c;
+    padding-bottom: 15px;
+}
+
+.author-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    background: #fff5e6;
+    border-radius: 60px;
+    padding: 10px 25px;
+    margin: 20px 0;
+    box-shadow: 0 5px 0 #d4b28c;
+}
+
+.author-img {
+    width: 50px;
+    height: 50px;
+    background: #b3a68f;
+    border-radius: 50%;
+}
+
+.ar-button {
+    display: inline-block;
+    background: #4CAF50;
+    color: white;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 20px 40px;
+    border-radius: 60px;
+    box-shadow: 0 10px 0 #2e6b31;
+    margin: 30px 0;
+    transition: all 0.1s ease;
+}
+
+.ar-button:active {
+    transform: translateY(10px);
+    box-shadow: 0 2px 0 #2e6b31;
+}
+
+.preview {
+    margin-top: 30px;
+    padding: 15px;
+    background: #eee;
+    border-radius: 20px;
+    border: 2px dashed #aaa;
+}
+
+.preview img {
+    border-radius: 15px;
+    border: 3px solid white;
+}
