@@ -55,11 +55,14 @@
             
             <!-- Анимированная 3D-модель для красоты (простой цветок) -->
             <a-entity position="0 0.8 0">
-                <a-text value="КЕДР" color="#228B22" align="center" scale="0.8 0.8 0.8" position="0 0.2 0"></a-text>
-                <a-text value="символ силы" color="#8B4513" align="center" scale="0.4 0.4 0.4" position="0 -0.1 0"></a-text>
-                <!-- Летающие листочки вокруг -->
-                <a-box color="green" width="0.05" height="0.1" depth="0.01" position="0.2 0.1 0.1" rotation="45 0 0"></a-box>
-                <a-box color="green" width="0.05" height="0.1" depth="0.01" position="-0.2 0.15 -0.1" rotation="-20 30 0"></a-box>
+                <!-- Ветка (палочка) -->
+                <a-cylinder radius="0.02" height="0.5" color="#8B4513" position="0 0 0" rotation="0 0 30"></a-cylinder>
+                <!-- Ягодки/цветочки -->
+                <a-sphere radius="0.08" color="#FF4500" position="0.2 0.2 0"></a-sphere>
+                <a-sphere radius="0.08" color="#FFD700" position="-0.1 0.25 0"></a-sphere>
+                <a-sphere radius="0.06" color="#32CD32" position="0.15 -0.1 0"></a-sphere>
+                <!-- Анимация покачивания -->
+                <a-animation attribute="rotation" to="0 10 20" dur="3000" direction="alternate" repeat="indefinite"></a-animation>
             </a-entity>
         </a-marker>
 
@@ -126,4 +129,5 @@
 </body>
 
 </html>
+
 
